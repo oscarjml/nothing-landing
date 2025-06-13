@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
-  const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [orderDetails, setOrderDetails] = useState<{ token: string; payerID: string } | null>(null);
 
   useEffect(() => {
     const token = searchParams.get('token');
@@ -53,18 +54,18 @@ export default function SuccessPage() {
           </p>
           
           <div className="flex flex-col space-y-2">
-            <a 
+            <Link 
               href="/"
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
             >
               Return to Store
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/nothing"
               className="text-blue-600 hover:text-blue-800 underline"
             >
               Visit our space experience
-            </a>
+            </Link>
           </div>
         </div>
 

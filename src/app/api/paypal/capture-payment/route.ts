@@ -25,7 +25,21 @@ async function getPayPalAccessToken() {
   return data.access_token;
 }
 
-async function saveToGoogleSheets(orderData: any) {
+async function saveToGoogleSheets(orderData: {
+  orderID: string;
+  quantity: number;
+  customMessage: string;
+  customerInfo: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    address: string;
+    city: string;
+    state: string;
+    zipCode: string;
+  };
+  total: string;
+}) {
   try {
     // Configure Google Sheets API
     let privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
@@ -60,7 +74,6 @@ async function saveToGoogleSheets(orderData: any) {
 
     // Prepare data for Google Sheets
     const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
-    const fullAddress = `${orderData.customerInfo.address}, ${orderData.customerInfo.city}, ${orderData.customerInfo.state} ${orderData.customerInfo.zipCode}`;
     
     const rowData = [
       orderData.orderID,

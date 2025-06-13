@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
       });
       
       hasHeaders = !!(getResponse.data.values && getResponse.data.values.length > 0);
-    } catch (error) {
+    } catch {
       console.log('Sheet might be empty, will add headers');
     }
 
